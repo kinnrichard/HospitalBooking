@@ -43,7 +43,7 @@
                         FontSize="20"
                         HorizontalOptions="CenterAndExpand"
                         HorizontalTextAlignment="Center"
-                        Text="Create new Appointment"
+                        Text="Tell us your concern"
                         TextColor="#2980B9"
                         VerticalOptions="Center" />
 
