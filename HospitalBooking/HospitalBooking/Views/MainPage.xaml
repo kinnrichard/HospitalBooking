@@ -74,7 +74,11 @@
                             CornerRadius="15"
                             Elevation="3">
                             <StackLayout>
-                                <Image Source="booking"/>
+                                <Image Source="booking">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding AppointmentCommand}" NumberOfTapsRequired="1" ></TapGestureRecognizer>
+                                    </Image.GestureRecognizers>
+                                </Image>
 
                                 <Label
                                     FontAttributes="Bold"
@@ -124,7 +128,11 @@
                             CornerRadius="15"
                             Elevation="3">
                             <StackLayout>
-                                <Image Source="settings" />
+                                <Image Source="settings">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding SettingsCommand}" NumberOfTapsRequired="1" ></TapGestureRecognizer>
+                                    </Image.GestureRecognizers>
+                                </Image>
 
                                 <Label
                                     FontAttributes="Bold"
@@ -145,8 +153,11 @@
                             CornerRadius="15"
                             Elevation="3">
                             <StackLayout>
-                                <Image Source="supp" />
-
+                                <Image Source="supp">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding SupportCommand}" NumberOfTapsRequired="1" ></TapGestureRecognizer>
+                                    </Image.GestureRecognizers>
+                                </Image>
                                 <Label
                                     FontAttributes="Bold"
                                     FontSize="20"

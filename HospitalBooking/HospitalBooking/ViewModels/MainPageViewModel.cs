@@ -13,6 +13,10 @@ namespace HospitalBooking.ViewModels
     public class MainPageViewModel : BaseViewModel
     {
         public ICommand HospitalCommand { get; private set; }
+        public ICommand AppointmentCommand { get; private set; }
+        public ICommand SettingsCommand { get; private set; }
+        public ICommand SupportCommand { get; private set; }
+
         Guid _id;
         public Guid Id
         {
@@ -59,6 +63,16 @@ namespace HospitalBooking.ViewModels
 
             HospitalCommand = new Command
             (async () => await App.Current.MainPage.Navigation.PushAsync(new HospitalPage(Location)));
+
+            AppointmentCommand = new Command
+           (async () => await App.Current.MainPage.Navigation.PushAsync(new AppointmentPage()));
+
+            SettingsCommand = new Command
+           (async () => await App.Current.MainPage.Navigation.PushAsync(new SettingsPage()));
+
+            SupportCommand = new Command
+           (async () => await App.Current.MainPage.Navigation.PushAsync(new SupportPage()));
+
 
         }
     }

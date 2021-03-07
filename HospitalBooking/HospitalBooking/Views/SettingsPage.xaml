@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:pv="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             x:Class="HospitalBooking.Views.SettingsPage"
+             NavigationPage.HasNavigationBar="False"
+             Padding="0,40,0,0"
+             BackgroundColor="#2980B9">
+    <StackLayout>
+        <Grid Margin="0,0,0,0">
+            <StackLayout Margin="20,0,20,0" Spacing="20">
+                <Image
+                        HeightRequest="30"
+                        HorizontalOptions="Start"
+                        Source="hamburgerMenu"
+                        VerticalOptions="Start"
+                        WidthRequest="30" />
+                <Label
+                        FontAttributes="Bold"
+                        FontSize="28"
+                        HorizontalOptions="StartAndExpand"
+                        Text="Application Settings"
+                        TextColor="White"
+                        VerticalOptions="StartAndExpand"
+                        WidthRequest="200" />
+            </StackLayout>
+            <Image
+                    HorizontalOptions="EndAndExpand"
+                    Source="bgImage"
+                    WidthRequest="200" />
+        </Grid>
+
+        <pv:PancakeView
+                Margin="0,30,0,0"
+                Padding="30,0,30,30"
+                BackgroundColor="#F3F5F9"
+                CornerRadius="40,40,0,0"
+                VerticalOptions="FillAndExpand">
+            <StackLayout BackgroundColor="#F3F5F9">
+                <Label
+                        Margin="20"
+                        FontAttributes="Bold"
+                        FontSize="20"
+                        HorizontalOptions="CenterAndExpand"
+                        HorizontalTextAlignment="Center"
+                        Text=""
+                        TextColor="#2980B9"
+                        VerticalOptions="Center" />
+
+            </StackLayout>
+        </pv:PancakeView>
+    </StackLayout>
+</ContentPage>
