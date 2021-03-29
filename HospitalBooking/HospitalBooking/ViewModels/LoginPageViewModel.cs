@@ -1,4 +1,5 @@
 ﻿using HospitalBooking.Services;
+using HospitalBooking.Views;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,11 +13,15 @@ namespace HospitalBooking.ViewModels
     public class LoginPageViewModel : BaseViewModel
     {
         public ICommand LoginCommand { get; private set; }
+        public ICommand RegisterCommand { get; private set; }
 
         public LoginPageViewModel()
         {
             LoginCommand = new Command
             (async () => await Login());
+
+            RegisterCommand = new Command
+             (async () => await App.Current.MainPage.Navigation.PushAsync(new RegistrationPage()));
         }
 
         string _username;
@@ -42,14 +47,14 @@ namespace HospitalBooking.ViewModels
         }
 
         Guid id;
-        public string usrnme;
-        public string location;
+        public string Username_;
+        public string Location_;
 
         private async Task Login()
         {
             if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
-                await App.Current.MainPage.DisplayAlert("No Internet", "You are not connected to internet", "Ok");
+                await App.Current.MainPage.DisplayAlert("No Internet", "You are not connected to internet.", "Ok");
             }
             else
             {
@@ -58,14 +63,14 @@ namespace HospitalBooking.ViewModels
                 if (response != null)
                 {
                     id = response.Id;
-                    usrnme = response.Username;
-                    location = response.Location;
+                    Username_ = response.Username;
+                    Location_ = response.Location;
 
-                    await App.Current.MainPage.Navigation.PushAsync(new MainPage(id, usrnme, location));
+                    await App.Current.MainPage.Navigation.PushAsync(new MainPage(id, Username_, Location_));
                 }
                 else
                 {
-                    await App.Current.MainPage.DisplayAlert("Invalid", "Wrong Username or Password", "Ok");
+                    await App.Current.MainPage.DisplayAlert("Invalid", "Wrong Username or Password.", "Ok");
                 }
             }           
         }

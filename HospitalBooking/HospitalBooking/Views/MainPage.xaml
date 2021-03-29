@@ -15,7 +15,6 @@
 
     <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 
-
         <StackLayout>
             <Grid Margin="0,0,0,0">
                 <StackLayout Margin="20,0,20,0" Spacing="20">
@@ -38,7 +37,6 @@
                     HorizontalOptions="EndAndExpand"
                     Source="bgImage"
                     WidthRequest="200" />
-                
             </Grid>
             <yummy:PancakeView
                 Margin="0,30,0,0"
@@ -99,14 +97,11 @@
                             CornerRadius="15"
                             Elevation="3">
                             <StackLayout>
-                                
                                 <Image Source="hospital">
                                     <Image.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding HospitalCommand}" NumberOfTapsRequired="1" ></TapGestureRecognizer>
                                     </Image.GestureRecognizers>
                                 </Image>
-
-
                                 <Label
                                     FontAttributes="Bold"
                                     FontSize="20"
@@ -115,8 +110,6 @@
                                     Text="Hospital near me"
                                     TextColor="Black"
                                     VerticalOptions="CenterAndExpand"/>
-
-
                             </StackLayout>
                         </yummy:PancakeView>
                         <yummy:PancakeView
@@ -133,7 +126,6 @@
                                         <TapGestureRecognizer Command="{Binding SettingsCommand}" NumberOfTapsRequired="1" ></TapGestureRecognizer>
                                     </Image.GestureRecognizers>
                                 </Image>
-
                                 <Label
                                     FontAttributes="Bold"
                                     FontSize="20"
@@ -170,9 +162,7 @@
                         </yummy:PancakeView>
                     </Grid>
                 </StackLayout>
-
             </yummy:PancakeView>
         </StackLayout>
     </ScrollView>
-
 </ContentPage>

@@ -14,13 +14,10 @@ namespace HospitalBooking
     {   
         public MainPage(Guid id,string username, string location)
         {
-
             InitializeComponent();
             BindingContext = new MainPageViewModel(id,username,location);
             //BindingContext = new MainPageViewModel();
             NavigationPage.SetHasBackButton(this, false);
-
-
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Firebase.Database;
+using Firebase.Database.Query;
 using HospitalBooking.Models;
 using Newtonsoft.Json;
 using System;
@@ -52,7 +53,6 @@ namespace HospitalBooking.Services
         #endregion
 
         #region Hospital
-
         //Check Hospital List per location [GET]
         public async Task<List<Hospital>> GetHospitalList(string location)
         {
@@ -75,7 +75,21 @@ namespace HospitalBooking.Services
             }
         }
 
+        public async Task<bool> RegisterUser(string username, string password, string firstname, string lastname, int age, string gender, string location)
+        {
+            var result = await firebase
+                .Child("User")
+                .PostAsync(new User() { Id = Guid.NewGuid(), Username = username, Password = password, Firstname = firstname, Lastname = lastname, Age = age, Gender = gender, Location = location });
 
+            if (result.Object != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         #endregion
     }
 }

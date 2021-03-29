@@ -55,10 +55,10 @@ namespace HospitalBooking.ViewModels
             
         }
 
-        public MainPageViewModel(Guid id,string usr, string location)
+        public MainPageViewModel(Guid id,string username, string location)
         {
             Id = id;
-            Username = usr;
+            Username = username;
             Location = location;
 
             HospitalCommand = new Command
@@ -72,8 +72,6 @@ namespace HospitalBooking.ViewModels
 
             SupportCommand = new Command
            (async () => await App.Current.MainPage.Navigation.PushAsync(new SupportPage()));
-
-
         }
     }
 }

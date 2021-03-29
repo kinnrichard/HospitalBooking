@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:pv="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" 
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" 
              xmlns:viewModel="clr-namespace:HospitalBooking.ViewModels"
              mc:Ignorable="d"
              x:Class="HospitalBooking.Views.HospitalPage"
@@ -34,8 +34,7 @@
                     Source="bgImage"
                     WidthRequest="200" />
         </Grid>
-
-        <pv:PancakeView
+        <yummy:PancakeView
                 Margin="0,30,0,0"
                 Padding="30,0,30,30"
                 BackgroundColor="#F3F5F9"
@@ -62,7 +61,7 @@
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <pv:PancakeView HasShadow="True" BackgroundColor="White" VerticalOptions="StartAndExpand" 
+                                <yummy:PancakeView HasShadow="True" BackgroundColor="White" VerticalOptions="StartAndExpand" 
                                     HorizontalOptions="FillAndExpand">
                                     <Grid VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand">
                                         <Grid.ColumnDefinitions>
@@ -124,12 +123,12 @@
                                             </Grid>
                                         </Expander>
                                     </Grid>
-                                </pv:PancakeView>
+                                </yummy:PancakeView>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
                 </ScrollView>
             </StackLayout>
-        </pv:PancakeView>
+        </yummy:PancakeView>
     </StackLayout>
 </ContentPage>
