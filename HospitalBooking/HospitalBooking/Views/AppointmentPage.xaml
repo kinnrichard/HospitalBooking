@@ -1,53 +1,234 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:pv="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" 
+             xmlns:renderers="clr-namespace:HospitalBooking.Controls"
              x:Class="HospitalBooking.Views.AppointmentPage"
              NavigationPage.HasNavigationBar="False"
              Padding="0,40,0,0"
              BackgroundColor="#2980B9">
-    <StackLayout>
-        <Grid Margin="0,0,0,0">
-            <StackLayout Margin="20,0,20,0" Spacing="20">
+    <StackLayout >
+        <StackLayout  Margin="0,0,0,0"  Orientation="Horizontal">
+            <StackLayout Margin="20,10,20,0" Spacing="20">
                 <Image
-                        HeightRequest="30"
-                        HorizontalOptions="Start"
-                        Source="hamburgerMenu"
-                        VerticalOptions="Start"
-                        WidthRequest="30" />
+                    HeightRequest="30"
+                    HorizontalOptions="Start"
+                    Source="hamburgerMenu"
+                    VerticalOptions="Start"
+                    WidthRequest="30" />
                 <Label
-                        FontAttributes="Bold"
-                        FontSize="28"
-                        HorizontalOptions="StartAndExpand"
-                        Text="Book an Appointment!"
-                        TextColor="White"
-                        VerticalOptions="StartAndExpand"
-                        WidthRequest="200" />
+                    FontAttributes="Bold"
+                    FontSize="30"
+                    Text="Book your Appointment"
+                    TextColor="White"
+                    VerticalOptions="CenterAndExpand" />
             </StackLayout>
-            <Image
-                    HorizontalOptions="EndAndExpand"
-                    Source="bgImage"
-                    WidthRequest="200" />
-        </Grid>
+            <Image Source="bgImage" 
+                   WidthRequest="200" />
+        </StackLayout>
 
-        <pv:PancakeView
-                Margin="0,30,0,0"
-                Padding="30,0,30,30"
-                BackgroundColor="#F3F5F9"
-                CornerRadius="40,40,0,0"
-                VerticalOptions="FillAndExpand">
-            <StackLayout BackgroundColor="#F3F5F9">
-                <Label
-                        Margin="20"
-                        FontAttributes="Bold"
+        <yummy:PancakeView
+            Margin="0,20,0,0"
+            Padding="30,50,30,30"
+            BackgroundColor="White"
+            CornerRadius="40,40,0,0"
+            VerticalOptions="FillAndExpand">
+
+            <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <StackLayout Spacing="30">
+                    <StackLayout Spacing="20">
+                        <Label
+                        Margin="20,0,0,0"
                         FontSize="20"
-                        HorizontalOptions="CenterAndExpand"
-                        HorizontalTextAlignment="Center"
-                        Text="Create new Appointment"
-                        TextColor="#2980B9"
-                        VerticalOptions="Center" />
-                
-            </StackLayout>
-        </pv:PancakeView>
+                        Text="Appointment name"
+                        TextColor="#99A1B3" />
+                        <yummy:PancakeView
+                        Padding="10,0,0,0"
+                        BackgroundColor="White"
+                        BorderThickness="1"
+                        CornerRadius="0"
+                        Elevation="3"
+                        HeightRequest="50">
+                            <renderers:BorderlessEntry
+                            Text="{Binding AppointmentName}"
+                            FontSize="20"
+                            ClearButtonVisibility="WhileEditing"
+                            TextColor="#484848" />
+                        </yummy:PancakeView>
+                    </StackLayout>
+
+                    <StackLayout Spacing="20">
+                        <Label
+                        Margin="20,0,0,0"
+                        FontSize="20"
+                        Text="Appointment description"
+                        TextColor="#99A1B3" />
+                        <yummy:PancakeView
+                        Padding="10,0,0,0"
+                        BackgroundColor="White"
+                        BorderThickness="1"
+                        CornerRadius="0"
+                        Elevation="3"
+                        HeightRequest="50">
+                            <renderers:BorderlessEntry
+                            Text="{Binding AppointmentDescription}"
+                            FontSize="20"
+                            ClearButtonVisibility="WhileEditing"
+                            TextColor="#484848" />
+                        </yummy:PancakeView>
+                    </StackLayout>
+
+                    <StackLayout Spacing="20">
+                        <Label
+                        Margin="20,0,0,0"
+                        FontSize="20"
+                        Text="Appointment date"
+                        TextColor="#99A1B3" />
+                        <yummy:PancakeView
+                        Padding="10,0,0,0"
+                        BackgroundColor="White"
+                        BorderThickness="1"
+                        CornerRadius="0"
+                        Elevation="3"
+                        HeightRequest="50">
+                            <renderers:BorderlessDatePicker
+                            Date="{Binding AppointmentDate}"
+                            FontSize="20"
+                            MinimumDate="{Binding MinimumDate}"
+                            MaximumDate="{Binding MaximumDate}"
+                            TextColor="#484848" />
+                        </yummy:PancakeView>
+                    </StackLayout>
+
+                    <StackLayout Spacing="20">
+                        <Label
+                        Margin="20,0,0,0"
+                        FontSize="20"
+                        Text="Patient name"
+                        TextColor="#99A1B3" />
+                        <yummy:PancakeView
+                        Padding="10,0,0,0"
+                        BackgroundColor="White"
+                        BorderThickness="1"
+                        CornerRadius="15"
+                        Elevation="3"
+                        HeightRequest="50">
+                            <renderers:BorderlessEntry
+                            Text="{Binding PatientName}"
+                            FontSize="20"
+                             ClearButtonVisibility="WhileEditing"
+                            TextColor="#484848" />
+                        </yummy:PancakeView>
+                    </StackLayout>
+
+                    <StackLayout Spacing="20">
+                        <Label
+                        Margin="20,0,0,0"
+                        FontSize="20"
+                        Text="Patient location"
+                        TextColor="#99A1B3" />
+                        <yummy:PancakeView
+                        Padding="10,0,0,0"
+                        BackgroundColor="White"
+                        BorderThickness="1"
+                        CornerRadius="15"
+                        Elevation="3"
+                        HeightRequest="50">
+                            <renderers:BorderlessEntry
+                            Text="{Binding PatientLocation}"
+                            FontSize="20"
+                            ClearButtonVisibility="WhileEditing"
+                            TextColor="#484848" />
+                        </yummy:PancakeView>
+                    </StackLayout>
+
+                    <StackLayout Spacing="20">
+                        <Label
+                        Margin="20,0,0,0"
+                        FontSize="20"
+                        Text="Patient age"
+                        TextColor="#99A1B3" />
+                        <yummy:PancakeView
+                        Padding="10,0,0,0"
+                        BackgroundColor="White"
+                        BorderThickness="1"
+                        CornerRadius="15"
+                        Elevation="3"
+                        HeightRequest="50">
+                            <renderers:BorderlessEntry
+                            Text="{Binding PatientAge}"
+                            FontSize="20"
+                            ClearButtonVisibility="WhileEditing"
+                            TextColor="#484848" />
+                        </yummy:PancakeView>
+                    </StackLayout>
+
+                    <StackLayout Spacing="20">
+                        <Label
+                        Margin="20,0,0,0"
+                        FontSize="20"
+                        Text="Patient gender"
+                        TextColor="#99A1B3" />
+                        <yummy:PancakeView
+                        Padding="10,0,0,0"
+                        BackgroundColor="White"
+                        BorderThickness="1"
+                        CornerRadius="15"
+                        Elevation="3"
+                        HeightRequest="50">
+                            <renderers:BorderlessEntry
+                            Text="{Binding PatientGender}"                    
+                            FontSize="20"
+                            ClearButtonVisibility="WhileEditing"
+                            Keyboard="Numeric"
+                            TextColor="#484848" />
+                        </yummy:PancakeView>
+                    </StackLayout>
+
+                    <StackLayout Spacing="20">
+                        <Label
+                        Margin="20,0,0,0"
+                        FontSize="20"
+                        Text="Hospital name"
+                        TextColor="#99A1B3" />
+                        <yummy:PancakeView
+                        Padding="10,0,0,0"
+                        BackgroundColor="White"
+                        BorderThickness="1"
+                        CornerRadius="15"
+                        Elevation="3"
+                        HeightRequest="50">
+                            <renderers:BorderlessPicker
+                            Title="--Select Hospital--"
+                            ItemsSource="{Binding HospitalList}"
+                            ItemDisplayBinding="{Binding Hospitalname}"
+                            SelectedItem="{Binding HospitalName}"
+                            FontSize="20"
+                            TextColor="#484848" />
+                        </yummy:PancakeView>
+                    </StackLayout>
+
+                    <yummy:PancakeView
+                    BackgroundColor="#2980B9"
+                    BorderThickness="1"
+                    CornerRadius="25"
+                    Elevation="3"
+                    HeightRequest="50"
+                    HorizontalOptions="CenterAndExpand"
+                    WidthRequest="300">
+                        <Button Text="Book Appointment" 
+                                BackgroundColor="#2980B9" 
+                                FontAttributes="Bold" FontFamily="Arial" 
+                                FontSize="Large" 
+                                TextColor="White" 
+                                HeightRequest="50" 
+                                WidthRequest="100" 
+                                VerticalOptions="Center" 
+                                CornerRadius="30" 
+                                Command="{Binding BookappointmentCommand}"/>
+                    </yummy:PancakeView>
+                </StackLayout>
+            </ScrollView>
+        </yummy:PancakeView>
     </StackLayout>
 </ContentPage>

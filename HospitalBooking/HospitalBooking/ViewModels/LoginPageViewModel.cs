@@ -49,7 +49,7 @@ namespace HospitalBooking.ViewModels
         Guid id;
         public string Username_;
         public string Location_;
-
+ 
         private async Task Login()
         {
             if (Connectivity.NetworkAccess != NetworkAccess.Internet)
@@ -65,7 +65,7 @@ namespace HospitalBooking.ViewModels
                     id = response.Id;
                     Username_ = response.Username;
                     Location_ = response.Location;
-
+                    
                     await App.Current.MainPage.Navigation.PushAsync(new MainPage(id, Username_, Location_));
                 }
                 else

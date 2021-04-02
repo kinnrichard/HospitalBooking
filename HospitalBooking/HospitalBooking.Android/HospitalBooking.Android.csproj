@@ -70,6 +70,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\BorderlessDatePickerRenderer.cs" />
     <Compile Include="Controls\BorderlessEntryRenderer.cs" />
     <Compile Include="Controls\BorderlessPickerRenderer.cs" />
     <Compile Include="MainActivity.cs" />

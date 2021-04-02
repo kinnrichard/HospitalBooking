@@ -37,6 +37,7 @@ namespace HospitalBooking.ViewModels
             var response = await ApiServices.ServiceClientInstance.GetHospitalList(LocationName);
             HospitalList = new ObservableCollection<Hospital>(response);
         }
+
         public HospitalPageViewModel(string location)
         {
             LocationName = location;

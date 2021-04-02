@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HospitalBooking.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,12 @@ namespace HospitalBooking.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AppointmentPage : ContentPage
     {
-        public AppointmentPage()
+        public AppointmentPage(Guid id)
         {
             InitializeComponent();
+            BindingContext = new AppointmentPageViewModel(id);
+            //BindingContext = new MainPageViewModel();
+            NavigationPage.SetHasBackButton(this, false);
         }
     }
 }

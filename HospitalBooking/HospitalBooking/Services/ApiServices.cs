@@ -38,7 +38,10 @@ namespace HospitalBooking.Services
         {
             var GetPerson = (await firebase
               .Child("User")
-              .OnceAsync<User>()).Where(a => a.Object.Username == username).Where(b => b.Object.Password == password).FirstOrDefault();
+              .OnceAsync<User>())
+              .Where(a => a.Object.Username == username)
+              .Where(b => b.Object.Password == password)
+              .FirstOrDefault();
 
             if (GetPerson != null)
             {
@@ -58,11 +61,13 @@ namespace HospitalBooking.Services
         {
             var GetHospital = (await firebase
               .Child("Hospital")
-              .OnceAsync<Hospital>()).Where(a => a.Object.Location.ToString() == location).Select(item => new Hospital
+              .OnceAsync<Hospital>())
+              .Where(a => a.Object.Location.ToString() == location)
+              .Select(item => new Hospital
               {
+                  Id = item.Object.Id,
                   Hospitalname = item.Object.Hospitalname,
-                  Location = item.Object.Location,
-                  
+                  Location = item.Object.Location,           
               }).ToList(); ;
 
             if (GetHospital != null)
@@ -80,6 +85,69 @@ namespace HospitalBooking.Services
             var result = await firebase
                 .Child("User")
                 .PostAsync(new User() { Id = Guid.NewGuid(), Username = username, Password = password, Firstname = firstname, Lastname = lastname, Age = age, Gender = gender, Location = location });
+
+            if (result.Object != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        #endregion
+
+        #region Appointment
+
+        public async Task<User> GetPatientInfo(Guid id)
+        {
+            var GetPerson = (await firebase
+              .Child("User")
+              .OnceAsync<User>())
+              .Where(a => a.Object.Id == id)
+              .FirstOrDefault();
+
+            if (GetPerson != null)
+            {
+                var content = GetPerson.Object as User;
+                return content;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public async Task<bool> BookAppointment(
+            string appointmentname, 
+            string appointmentdescription, 
+            string appointmentdate, 
+            string patientid, 
+            string patientname, 
+            string patientlocation, 
+            int patientage, 
+            string patientgender,
+            string hospitalid,
+            string hospitalname,
+            string hospitallocation
+            )
+        {
+            var result = await firebase
+                .Child("Appointment")
+                .PostAsync(new Appointment() { 
+                    Id = Guid.NewGuid(), 
+                    AppointmentName = appointmentname, 
+                    AppointmentDescription = appointmentdescription, 
+                    AppointmentDate = appointmentdate, 
+                    PatientId = patientid,
+                    PatientName = patientname, 
+                    PatientLocation = patientlocation, 
+                    PatientAge = patientage, 
+                    PatientGender = patientgender,
+                    HospitalId = hospitalid,
+                    HospitalName = hospitalname,
+                    HospitalLocation = hospitallocation              
+                });
 
             if (result.Object != null)
             {

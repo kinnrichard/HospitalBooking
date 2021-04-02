@@ -50,6 +50,28 @@ namespace HospitalBooking.ViewModels
             }
         }
 
+        int _age;
+        public int Age
+        {
+            get { return _age; }
+            set
+            {
+                _age = value;
+                OnPropertyChanged();
+            }
+        }
+
+        string _gender;
+        public string Gender
+        {
+            get { return _gender; }
+            set
+            {
+                _gender = value;
+                OnPropertyChanged();
+            }
+        }
+
         public MainPageViewModel()
         {
             
@@ -59,13 +81,13 @@ namespace HospitalBooking.ViewModels
         {
             Id = id;
             Username = username;
-            Location = location;
+            Location = location;    
 
             HospitalCommand = new Command
             (async () => await App.Current.MainPage.Navigation.PushAsync(new HospitalPage(Location)));
 
             AppointmentCommand = new Command
-           (async () => await App.Current.MainPage.Navigation.PushAsync(new AppointmentPage()));
+           (async () => await App.Current.MainPage.Navigation.PushAsync(new AppointmentPage(Id)));
 
             SettingsCommand = new Command
            (async () => await App.Current.MainPage.Navigation.PushAsync(new SettingsPage()));
