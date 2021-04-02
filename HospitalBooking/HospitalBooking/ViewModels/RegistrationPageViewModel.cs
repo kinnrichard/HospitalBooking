@@ -175,8 +175,8 @@ namespace HospitalBooking.ViewModels
             }
         }
 
-        string _gender;
-        public string Gender
+        private Gender _gender;
+        public Gender Gender
         {
             get { return _gender; }
             set
@@ -186,8 +186,8 @@ namespace HospitalBooking.ViewModels
             }
         }
 
-        string _location;
-        public string Location
+        private City _location;
+        public City Location
         {
             get { return _location; }
             set
@@ -205,7 +205,7 @@ namespace HospitalBooking.ViewModels
             }
             else
             {
-                var response = await ApiServices.ServiceClientInstance.RegisterUser(Username, Password, Firstname, Lastname, Age, Gender, Location);
+                var response = await ApiServices.ServiceClientInstance.RegisterUser(Username, Password, Firstname, Lastname, Age, Gender.GenderValue.ToString(), Location.Cityname.ToString());
 
                 if (response == true)
                 {

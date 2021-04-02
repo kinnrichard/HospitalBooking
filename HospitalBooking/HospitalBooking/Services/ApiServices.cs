@@ -118,16 +118,35 @@ namespace HospitalBooking.Services
             }
         }
 
+        public async Task<Hospital> GetHospitalInfo(string hospitalname)
+        {
+            var GetHospital = (await firebase
+              .Child("Hospital")
+              .OnceAsync<Hospital>())
+              .Where(a => a.Object.Hospitalname == hospitalname)
+              .FirstOrDefault();
+
+            if (GetHospital != null)
+            {
+                var content = GetHospital.Object as Hospital;
+                return content;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public async Task<bool> BookAppointment(
             string appointmentname, 
             string appointmentdescription, 
             string appointmentdate, 
-            string patientid, 
+            Guid patientid, 
             string patientname, 
             string patientlocation, 
             int patientage, 
             string patientgender,
-            string hospitalid,
+            Guid hospitalid,
             string hospitalname,
             string hospitallocation
             )

@@ -13,5 +13,18 @@ namespace HospitalBooking.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        protected bool SetProperty<T>(ref T backfield, T value,
+            [CallerMemberName] string propertyName = null
+            )
+        {
+            if (EqualityComparer<T>.Default.Equals(backfield, value))
+            {
+                return false;
+            }
+            backfield = value;
+            OnPropertyChanged(propertyName);
+            return true;
+        }
     }
 }

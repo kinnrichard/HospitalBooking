@@ -166,7 +166,7 @@
                             Title="--Select Gender--"
                             ItemsSource="{Binding GenderList}"
                             ItemDisplayBinding="{Binding GenderValue}"
-                            SelectedItem="{Binding Gender}"
+                            SelectedItem="{Binding Gender, Mode=TwoWay}"
                             FontSize="20"
                             TextColor="#484848" />
                         </yummy:PancakeView>
@@ -189,7 +189,7 @@
                             Title="--Select Gender--"
                             ItemsSource="{Binding CityList}"
                             ItemDisplayBinding="{Binding Cityname}"
-                            SelectedItem="{Binding Location}"
+                            SelectedItem="{Binding Location, Mode=TwoWay}"
                             FontSize="20"
                             TextColor="#484848" />
                         </yummy:PancakeView>

@@ -96,6 +96,7 @@
                             FontSize="20"
                             MinimumDate="{Binding MinimumDate}"
                             MaximumDate="{Binding MaximumDate}"
+                            Format="MMM dd, yyyy"
                             TextColor="#484848" />
                         </yummy:PancakeView>
                     </StackLayout>
@@ -200,13 +201,35 @@
                         HeightRequest="50">
                             <renderers:BorderlessPicker
                             Title="--Select Hospital--"
-                            ItemsSource="{Binding HospitalList}"
-                            ItemDisplayBinding="{Binding Hospitalname}"
-                            SelectedItem="{Binding HospitalName}"
+                            SelectedItem="{Binding HospitalName, Mode=TwoWay}"
+                            ItemsSource="{Binding HospitalList, Mode=TwoWay}"
+                            ItemDisplayBinding="{Binding Hospitalname}"              
                             FontSize="20"
                             TextColor="#484848" />
                         </yummy:PancakeView>
                     </StackLayout>
+
+                    <StackLayout Spacing="20">
+                        <Label
+                        Margin="20,0,0,0"
+                        FontSize="20"
+                        Text="Hospital location"
+                        TextColor="#99A1B3" />
+                        <yummy:PancakeView
+                        Padding="10,0,0,0"
+                        BackgroundColor="White"
+                        BorderThickness="1"
+                        CornerRadius="15"
+                        Elevation="3"
+                        HeightRequest="50">
+                            <renderers:BorderlessEntry
+                            Text="{Binding HospitalLocation}"
+                            FontSize="20"
+                            ClearButtonVisibility="WhileEditing"
+                            TextColor="#484848" />
+                        </yummy:PancakeView>
+                    </StackLayout>
+
 
                     <yummy:PancakeView
                     BackgroundColor="#2980B9"
