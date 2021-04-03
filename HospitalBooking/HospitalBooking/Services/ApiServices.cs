@@ -177,6 +177,31 @@ namespace HospitalBooking.Services
                 return false;
             }
         }
+
+        public async Task<List<Appointment>> GetAppointment(Guid patientid)
+        {
+            var GetAppointment = (await firebase
+              .Child("Appointment")
+              .OnceAsync<Appointment>())
+              .Where(a => a.Object.PatientId == patientid)
+              .Select(item => new Appointment
+              {
+                  Id = item.Object.Id,
+                  AppointmentName = item.Object.AppointmentName,
+                  AppointmentDescription = item.Object.AppointmentDescription,
+                  HospitalName = item.Object.HospitalName
+              }).ToList(); ;
+
+            if (GetAppointment != null)
+            {
+                return new List<Appointment>(GetAppointment);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         #endregion
     }
 }

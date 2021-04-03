@@ -121,9 +121,9 @@
                             CornerRadius="15"
                             Elevation="3">
                             <StackLayout>
-                                <Image Source="settings">
+                                <Image Source="appointment">
                                     <Image.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding SettingsCommand}" NumberOfTapsRequired="1" ></TapGestureRecognizer>
+                                        <TapGestureRecognizer Command="{Binding MyAppointmentCommand}" NumberOfTapsRequired="1" ></TapGestureRecognizer>
                                     </Image.GestureRecognizers>
                                 </Image>
                                 <Label
@@ -131,7 +131,7 @@
                                     FontSize="20"
                                     HorizontalOptions="CenterAndExpand"
                                     HorizontalTextAlignment="Center"
-                                    Text="Settings"
+                                    Text="My Appointments"
                                     TextColor="Black"
                                     VerticalOptions="CenterAndExpand" />
                             </StackLayout>
@@ -155,7 +155,7 @@
                                     FontSize="20"
                                     HorizontalOptions="CenterAndExpand"
                                     HorizontalTextAlignment="Center"
-                                    Text="Chat Support"
+                                    Text="Contact Us"
                                     TextColor="Black"
                                     VerticalOptions="CenterAndExpand" />
                             </StackLayout>

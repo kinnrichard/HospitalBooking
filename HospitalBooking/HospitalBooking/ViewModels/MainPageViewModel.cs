@@ -14,6 +14,7 @@ namespace HospitalBooking.ViewModels
     {
         public ICommand HospitalCommand { get; private set; }
         public ICommand AppointmentCommand { get; private set; }
+        public ICommand MyAppointmentCommand { get; private set; }
         public ICommand SettingsCommand { get; private set; }
         public ICommand SupportCommand { get; private set; }
 
@@ -88,6 +89,9 @@ namespace HospitalBooking.ViewModels
 
             AppointmentCommand = new Command
            (async () => await App.Current.MainPage.Navigation.PushAsync(new AppointmentPage(Id)));
+
+            MyAppointmentCommand = new Command
+           (async () => await App.Current.MainPage.Navigation.PushAsync(new MyAppointmentPage(Id)));
 
             SettingsCommand = new Command
            (async () => await App.Current.MainPage.Navigation.PushAsync(new SettingsPage()));
