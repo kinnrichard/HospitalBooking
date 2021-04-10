@@ -220,3 +220,4 @@ namespace HospitalBooking.ViewModels
         }
     }
 }
+

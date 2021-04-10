@@ -4,6 +4,7 @@ using HospitalBooking.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -53,6 +54,22 @@ namespace HospitalBooking.Services
                 return null;
             }
         }
+
+        public async Task<bool> RegisterUser(string username, string password, string firstname, string lastname, int age, string gender, string location)
+        {
+            var result = await firebase
+                .Child("User")
+                .PostAsync(new User() { Id = Guid.NewGuid(), Username = username, Password = password, Firstname = firstname, Lastname = lastname, Age = age, Gender = gender, Location = location });
+
+            if (result.Object != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         #endregion
 
         #region Hospital
@@ -77,22 +94,6 @@ namespace HospitalBooking.Services
             else
             {
                 return null;
-            }
-        }
-
-        public async Task<bool> RegisterUser(string username, string password, string firstname, string lastname, int age, string gender, string location)
-        {
-            var result = await firebase
-                .Child("User")
-                .PostAsync(new User() { Id = Guid.NewGuid(), Username = username, Password = password, Firstname = firstname, Lastname = lastname, Age = age, Gender = gender, Location = location });
-
-            if (result.Object != null)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
             }
         }
         #endregion
@@ -140,7 +141,7 @@ namespace HospitalBooking.Services
         public async Task<bool> BookAppointment(
             string appointmentname, 
             string appointmentdescription, 
-            string appointmentdate, 
+            DateTime appointmentdate, 
             Guid patientid, 
             string patientname, 
             string patientlocation, 
@@ -148,7 +149,8 @@ namespace HospitalBooking.Services
             string patientgender,
             Guid hospitalid,
             string hospitalname,
-            string hospitallocation
+            string hospitallocation,
+            string status
             )
         {
             var result = await firebase
@@ -165,7 +167,8 @@ namespace HospitalBooking.Services
                     PatientGender = patientgender,
                     HospitalId = hospitalid,
                     HospitalName = hospitalname,
-                    HospitalLocation = hospitallocation              
+                    HospitalLocation = hospitallocation,
+                    Status = status
                 });
 
             if (result.Object != null)
@@ -188,13 +191,43 @@ namespace HospitalBooking.Services
               {
                   Id = item.Object.Id,
                   AppointmentName = item.Object.AppointmentName,
+                  AppointmentDate = item.Object.AppointmentDate,
                   AppointmentDescription = item.Object.AppointmentDescription,
-                  HospitalName = item.Object.HospitalName
+                  HospitalName = item.Object.HospitalName,
+                  HospitalLocation = item.Object.HospitalLocation,
+                  Status = item.Object.Status
               }).ToList(); ;
 
             if (GetAppointment != null)
             {
                 return new List<Appointment>(GetAppointment);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public async Task<ObservableCollection<AppointmentDetails>> GetAppointmentDetails(Guid patientid)
+        {
+            var GetAppointment = (await firebase
+              .Child("Appointment")
+              .OnceAsync<AppointmentDetails>())
+              .Where(a => a.Object.PatientId == patientid)
+              .Select(item => new AppointmentDetails
+              {
+                  Id = item.Object.Id,
+                  AppointmentName = item.Object.AppointmentName,
+                  AppointmentDate = item.Object.AppointmentDate,
+                  AppointmentDescription = item.Object.AppointmentDescription,
+                  HospitalName = item.Object.HospitalName,
+                  HospitalLocation = item.Object.HospitalLocation,
+                  Status = item.Object.Status
+              }).ToList(); ;
+
+            if (GetAppointment != null)
+            {
+                return new ObservableCollection<AppointmentDetails>(GetAppointment);
             }
             else
             {

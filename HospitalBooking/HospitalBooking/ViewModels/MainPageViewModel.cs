@@ -17,6 +17,7 @@ namespace HospitalBooking.ViewModels
         public ICommand MyAppointmentCommand { get; private set; }
         public ICommand SettingsCommand { get; private set; }
         public ICommand SupportCommand { get; private set; }
+        public ICommand NotificationCommand { get; private set; }
 
         Guid _id;
         public Guid Id
@@ -98,6 +99,11 @@ namespace HospitalBooking.ViewModels
 
             SupportCommand = new Command
            (async () => await App.Current.MainPage.Navigation.PushAsync(new SupportPage()));
+
+            NotificationCommand = new Command
+          (async () => await App.Current.MainPage.Navigation.PushAsync(new NotificationPage()));
+
+
         }
     }
 }

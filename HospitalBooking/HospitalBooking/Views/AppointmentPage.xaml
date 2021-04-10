@@ -249,9 +249,30 @@
                                 VerticalOptions="Center" 
                                 CornerRadius="30" 
                                 Command="{Binding BookappointmentCommand}"/>
+                        
                     </yummy:PancakeView>
+                    <Label
+                        Margin="20,0,0,0"
+                        FontSize="20"
+                        Text=""
+                        TextColor="#99A1B3" />
+                    <Label
+                        Margin="20,0,0,0"
+                        FontSize="20"
+                        Text=""
+                        TextColor="#99A1B3" />
                 </StackLayout>
             </ScrollView>
         </yummy:PancakeView>
+        <StackLayout>
+            <Label
+                                    FontAttributes="Bold"
+                                    FontSize="20"
+                                    HorizontalOptions="CenterAndExpand"
+                                    HorizontalTextAlignment="Center"
+                                    Text="Hospital Online Appointment"
+                                    TextColor="White"
+                                    VerticalOptions="CenterAndExpand" />
+        </StackLayout>
     </StackLayout>
 </ContentPage>

@@ -9,10 +9,6 @@
              NavigationPage.HasNavigationBar="False"
              BackgroundColor="#2980B9">
 
-    <ContentPage.BindingContext>
-        <viewModel:MainPageViewModel />
-    </ContentPage.BindingContext>
-
     <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 
         <StackLayout>
@@ -21,9 +17,14 @@
                     <Image
                         HeightRequest="30"
                         HorizontalOptions="Start"
-                        Source="hamburgerMenu"
+                        Source="notification"
                         VerticalOptions="Start"
-                        WidthRequest="30" />
+                        WidthRequest="30" >
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NotificationCommand}" NumberOfTapsRequired="1" ></TapGestureRecognizer>
+                        </Image.GestureRecognizers>
+
+                    </Image>
                     <Label
                         FontAttributes="Bold"
                         FontSize="28"
@@ -163,6 +164,17 @@
                     </Grid>
                 </StackLayout>
             </yummy:PancakeView>
+            <StackLayout>
+                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="20"
+                                    HorizontalOptions="CenterAndExpand"
+                                    HorizontalTextAlignment="Center"
+                                    Text="Hospital Online Appointment"
+                                    TextColor="White"
+                                    VerticalOptions="CenterAndExpand" />
+            </StackLayout>
         </StackLayout>
     </ScrollView>
+    
 </ContentPage>

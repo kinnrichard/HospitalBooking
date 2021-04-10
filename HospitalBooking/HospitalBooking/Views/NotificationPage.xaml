@@ -1,16 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             x:Class="HospitalBooking.Views.NotificationPage"
              xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" 
-             xmlns:viewModel="clr-namespace:HospitalBooking.ViewModels"
-             mc:Ignorable="d"
-             x:Class="HospitalBooking.Views.HospitalPage"
+             xmlns:renderers="clr-namespace:HospitalBooking.Controls"
              NavigationPage.HasNavigationBar="False"
              Padding="0,40,0,0"
              BackgroundColor="#2980B9">
-
     <StackLayout>
         <Grid Margin="0,0,0,0">
             <StackLayout Margin="20,0,20,0" Spacing="20">
@@ -24,7 +20,7 @@
                         FontAttributes="Bold"
                         FontSize="28"
                         HorizontalOptions="StartAndExpand"
-                        Text="{Binding LocationName, StringFormat='List of hospitals near your location :{0}'}"
+                        Text="My Notification"
                         TextColor="White"
                         VerticalOptions="StartAndExpand"
                         WidthRequest="200" />
@@ -47,11 +43,11 @@
                         FontSize="20"
                         HorizontalOptions="CenterAndExpand"
                         HorizontalTextAlignment="Center"
-                        Text="Hospital List"
+                        Text="Notification List"
                         TextColor="#2980B9"
                         VerticalOptions="Center" />
                 <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                    <ListView ItemsSource="{Binding HospitalList}" HasUnevenRows="True">
+                    <ListView ItemsSource="{Binding NotificationList}" HasUnevenRows="True">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
@@ -62,13 +58,16 @@
                                             <ColumnDefinition Width="3.5*"/>
                                         </Grid.ColumnDefinitions>
                                         <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-                                            
+                                            <Label Text="{Binding AppointmentDate, StringFormat='{0:dd}'}" TextColor="Black" FontSize="27" 
+                                                   HorizontalOptions="Center"/>
+                                            <Label Text="{Binding AppointmentDate, StringFormat='{0:MMMM}'}" TextColor="Black" FontSize="15" 
+                                                   HorizontalOptions="Center" Margin="0,-10,0,0"/>
                                         </StackLayout>
                                         <BoxView Grid.Column="1" BackgroundColor="#F2F4F8" WidthRequest="1" HorizontalOptions="Start" 
                                                  VerticalOptions="FillAndExpand"/>
                                         <StackLayout Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" Margin="20">
-                                            <Label Text="{Binding Hospitalname}" TextColor="Black" FontSize="20"/>
-                                            <Label Text="{Binding Location}" TextColor="#2F3246" FontSize="15" Margin="0,-10,0,0"/>
+                                            <Label Text="{Binding AppointmentName}" TextColor="Black" FontSize="20"/>
+                                            <Label Text="{Binding Status}" TextColor="#2F3246" FontSize="15" Margin="0,-10,0,0"/>
                                         </StackLayout>
                                     </Grid>
                                 </ViewCell>
@@ -78,15 +77,5 @@
                 </ScrollView>
             </StackLayout>
         </yummy:PancakeView>
-        <StackLayout>
-            <Label
-                                    FontAttributes="Bold"
-                                    FontSize="20"
-                                    HorizontalOptions="CenterAndExpand"
-                                    HorizontalTextAlignment="Center"
-                                    Text="Hospital Online Appointment"
-                                    TextColor="White"
-                                    VerticalOptions="CenterAndExpand" />
-        </StackLayout>
     </StackLayout>
 </ContentPage>

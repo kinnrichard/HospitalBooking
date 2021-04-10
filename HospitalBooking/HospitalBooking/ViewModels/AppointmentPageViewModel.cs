@@ -18,6 +18,7 @@ namespace HospitalBooking.ViewModels
         public ICommand BookappointmentCommand { get; private set; }
         public string MinimumDate = DateTime.Now.ToString("MM/dd/yyyy");
         public string MaximumDate = DateTime.Now.AddYears(2).ToString("MM/dd/yyyy");
+        public string Status = "Pending";
 
         ObservableCollection<Hospital> _hospitalList;
         public ObservableCollection<Hospital> HospitalList
@@ -52,8 +53,8 @@ namespace HospitalBooking.ViewModels
             }
         }
 
-        string _appointmentdate;
-        public string AppointmentDate
+        DateTime _appointmentdate;
+        public DateTime AppointmentDate
         {
             get { return _appointmentdate; }
             set
@@ -163,6 +164,7 @@ namespace HospitalBooking.ViewModels
             }
         }
 
+        
         private async void GetPatientInfo()
         {
             var response = await ApiServices.ServiceClientInstance.GetPatientInfo(PatientId);
@@ -173,6 +175,7 @@ namespace HospitalBooking.ViewModels
                 PatientLocation = response.Location;
                 PatientAge = response.Age;
                 PatientGender = response.Gender;
+                AppointmentDate = DateTime.Now;
 
                 GetHostpitals();
             }
@@ -213,7 +216,8 @@ namespace HospitalBooking.ViewModels
                     PatientGender,
                     HospitalId,
                     HospitalName.Hospitalname.ToString(),
-                    HospitalLocation
+                    HospitalLocation,
+                    Status
                     );
 
                 if (response == true)
