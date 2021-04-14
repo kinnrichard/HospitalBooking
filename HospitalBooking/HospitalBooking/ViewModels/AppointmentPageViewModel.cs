@@ -19,6 +19,7 @@ namespace HospitalBooking.ViewModels
         public string MinimumDate = DateTime.Now.ToString("MM/dd/yyyy");
         public string MaximumDate = DateTime.Now.AddYears(2).ToString("MM/dd/yyyy");
         public string Status = "Pending";
+        public string NotificationDetails;
 
         ObservableCollection<Hospital> _hospitalList;
         public ObservableCollection<Hospital> HospitalList
@@ -167,6 +168,7 @@ namespace HospitalBooking.ViewModels
         
         private async void GetPatientInfo()
         {
+            
             var response = await ApiServices.ServiceClientInstance.GetPatientInfo(PatientId);
             if (response != null)
             {
@@ -178,6 +180,29 @@ namespace HospitalBooking.ViewModels
                 AppointmentDate = DateTime.Now;
 
                 GetHostpitals();
+            }
+        }
+
+        private async void SendNotification()
+        {
+            NotificationDetails = PatientName + " booked for appointment on " + AppointmentDate.ToString("MM dd,yyyy") + " for " + AppointmentName;
+
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
+            {
+                await App.Current.MainPage.DisplayAlert("No Internet", "You are not connected to internet", "Ok");
+            }
+            else
+            {
+                var response = await ApiServices.ServiceClientInstance.BookNotification(
+                    HospitalId,
+                    NotificationDetails,
+                    DateTime.Now                    
+                    );
+
+                if (response == false)
+                {
+                    await App.Current.MainPage.DisplayAlert("Failed", "Failed to send notification.", "Ok");
+                }
             }
         }
 
@@ -223,6 +248,7 @@ namespace HospitalBooking.ViewModels
                 if (response == true)
                 {
                     await App.Current.MainPage.DisplayAlert("Success", "You book at " + HospitalName.Hospitalname.ToString() + " on " + AppointmentDate.ToString() , "Ok");
+                    SendNotification();
                     await App.Current.MainPage.Navigation.PushAsync(new MainPage(PatientId,PatientUsername,PatientLocation));
                 }
                 else

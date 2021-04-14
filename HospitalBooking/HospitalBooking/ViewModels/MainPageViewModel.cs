@@ -101,7 +101,7 @@ namespace HospitalBooking.ViewModels
            (async () => await App.Current.MainPage.Navigation.PushAsync(new SupportPage()));
 
             NotificationCommand = new Command
-          (async () => await App.Current.MainPage.Navigation.PushAsync(new NotificationPage()));
+          (async () => await App.Current.MainPage.Navigation.PushAsync(new NotificationPage(Id)));
 
 
         }

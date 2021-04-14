@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HospitalBooking.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,12 @@ namespace HospitalBooking.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NotificationPage : ContentPage
     {
-        public NotificationPage()
+        public NotificationPage(Guid Id)
         {
             InitializeComponent();
+            BindingContext = new NotificationPageViewModel(Id);
+            //BindingContext = new MainPageViewModel();
+            NavigationPage.SetHasBackButton(this, false);
         }
     }
 }

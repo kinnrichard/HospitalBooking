@@ -11,7 +11,6 @@ namespace HospitalBooking.Models
         public Guid HospitalId { get; set; }
         public string NotificationDetails { get; set; }
         public DateTime NotificationDate { get; set; }
-
-
+        public string NotificationFlag { get; set; }
     }
 }

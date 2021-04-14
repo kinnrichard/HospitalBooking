@@ -236,5 +236,53 @@ namespace HospitalBooking.Services
         }
 
         #endregion
+
+        #region Notification
+
+        public async Task<bool> BookNotification(Guid hospitalid, string notification, DateTime notificationdate)
+        {
+            var result = await firebase
+                .Child("Notification")
+                .PostAsync(new Notification() { 
+                    Id = Guid.NewGuid(), 
+                    HospitalId = hospitalid, 
+                    NotificationDetails = notification, 
+                    NotificationDate = notificationdate
+                });
+
+            if (result.Object != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public async Task<List<Notification>> GetNotification(Guid patientid)
+        {
+            var GetNotification = (await firebase
+              .Child("Notification")
+              .OnceAsync<Notification>())
+              .Where(a => a.Object.PatientId == patientid)
+              .Select(item => new Notification
+              {
+                  Id = item.Object.Id,
+                  HospitalId = item.Object.HospitalId,
+                  NotificationDetails = item.Object.NotificationDetails,
+                  NotificationDate = item.Object.NotificationDate
+              }).ToList(); ;
+
+            if (GetNotification != null)
+            {
+                return new List<Notification>(GetNotification);
+            }
+            else
+            {
+                return null;
+            }
+        }
+        #endregion
     }
 }
