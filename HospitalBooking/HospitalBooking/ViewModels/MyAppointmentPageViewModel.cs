@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace HospitalBooking.ViewModels
@@ -43,8 +45,7 @@ namespace HospitalBooking.ViewModels
             }
         }
 
-
-
+        
         private async void GetAppointment()
         {
             var response = await ApiServices.ServiceClientInstance.GetAppointment(PatientId);
