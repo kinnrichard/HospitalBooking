@@ -196,7 +196,7 @@ namespace HospitalBooking.Services
                   HospitalName = item.Object.HospitalName,
                   HospitalLocation = item.Object.HospitalLocation,
                   Status = item.Object.Status
-              }).ToList(); ;
+              }).ToList();
 
             if (GetAppointment != null)
             {
