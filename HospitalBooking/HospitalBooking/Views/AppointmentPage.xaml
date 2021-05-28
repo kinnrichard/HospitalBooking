@@ -203,7 +203,7 @@
                             Title="--Select Hospital--"
                             SelectedItem="{Binding HospitalName, Mode=TwoWay}"
                             ItemsSource="{Binding HospitalList, Mode=TwoWay}"
-                            ItemDisplayBinding="{Binding Hospitalname}"              
+                            ItemDisplayBinding="{Binding HospitalName}"              
                             FontSize="20"
                             TextColor="#484848" />
                         </yummy:PancakeView>

@@ -21,7 +21,7 @@ namespace HospitalBooking.Services
         public ApiServices()
         {
             //API Address
-            firebase = new FirebaseClient("https://hospitalbooking-f0d4c-default-rtdb.firebaseio.com/");
+            firebase = new FirebaseClient("https://hostpitalbooking-default-rtdb.firebaseio.com/");
         }
         public static ApiServices ServiceClientInstance
         {
@@ -77,14 +77,14 @@ namespace HospitalBooking.Services
         public async Task<List<Hospital>> GetHospitalList(string location)
         {
             var GetHospital = (await firebase
-              .Child("Hospital")
+              .Child("HospitalUser")
               .OnceAsync<Hospital>())
-              .Where(a => a.Object.Location.ToString() == location)
+              .Where(a => a.Object.HospitalLocation.ToString() == location)
               .Select(item => new Hospital
               {
                   Id = item.Object.Id,
-                  Hospitalname = item.Object.Hospitalname,
-                  Location = item.Object.Location,           
+                  HospitalName = item.Object.HospitalName,
+                  HospitalLocation = item.Object.HospitalLocation,           
               }).ToList(); ;
 
             if (GetHospital != null)
@@ -122,9 +122,9 @@ namespace HospitalBooking.Services
         public async Task<Hospital> GetHospitalInfo(string hospitalname)
         {
             var GetHospital = (await firebase
-              .Child("Hospital")
+              .Child("HospitalUser")
               .OnceAsync<Hospital>())
-              .Where(a => a.Object.Hospitalname == hospitalname)
+              .Where(a => a.Object.HospitalName == hospitalname)
               .FirstOrDefault();
 
             if (GetHospital != null)
@@ -141,7 +141,7 @@ namespace HospitalBooking.Services
         public async Task<bool> BookAppointment(
             string appointmentname, 
             string appointmentdescription, 
-            DateTime appointmentdate, 
+            string appointmentdate, 
             Guid patientid, 
             string patientname, 
             string patientlocation, 
@@ -239,7 +239,7 @@ namespace HospitalBooking.Services
 
         #region Notification
 
-        public async Task<bool> BookNotification(Guid hospitalid, string notification, DateTime notificationdate)
+        public async Task<bool> BookNotification(Guid hospitalid, string notification, string notificationdate)
         {
             var result = await firebase
                 .Child("Notification")

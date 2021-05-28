@@ -54,8 +54,8 @@ namespace HospitalBooking.ViewModels
             }
         }
 
-        DateTime _appointmentdate;
-        public DateTime AppointmentDate
+        string _appointmentdate;
+        public string AppointmentDate
         {
             get { return _appointmentdate; }
             set
@@ -150,7 +150,7 @@ namespace HospitalBooking.ViewModels
             {
                 _hospitalname = value;
                 OnPropertyChanged();
-                GetHospitalInfo(HospitalName.Hospitalname.ToString());
+                GetHospitalInfo(HospitalName.HospitalName.ToString());
             }
         }
 
@@ -177,7 +177,7 @@ namespace HospitalBooking.ViewModels
                 PatientLocation = response.Location;
                 PatientAge = response.Age;
                 PatientGender = response.Gender;
-                AppointmentDate = DateTime.Now;
+                AppointmentDate = DateTime.Now.ToString("MMM dd, yyyy");
 
                 GetHostpitals();
             }
@@ -185,7 +185,7 @@ namespace HospitalBooking.ViewModels
 
         private async void SendNotification()
         {
-            NotificationDetails = PatientName + " booked for appointment on " + AppointmentDate.ToString("MM dd,yyyy") + " for " + AppointmentName;
+            NotificationDetails = PatientName + " booked for appointment on " + AppointmentDate + " for " + AppointmentName;
 
             if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
@@ -196,7 +196,7 @@ namespace HospitalBooking.ViewModels
                 var response = await ApiServices.ServiceClientInstance.BookNotification(
                     HospitalId,
                     NotificationDetails,
-                    DateTime.Now                    
+                    DateTime.Now.ToString("MMM dd, yyyy")
                     );
 
                 if (response == false)
@@ -218,12 +218,14 @@ namespace HospitalBooking.ViewModels
             if (response != null)
             {
                 HospitalId = response.Id;
-                HospitalLocation = response.Location.ToString();
+                HospitalLocation = response.HospitalLocation.ToString();
             }
         }
 
         private async Task BookAppointment()
         {
+            //string appointmentdate = AppointmentDate.ToString("MMddyyyy");
+
             if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 await App.Current.MainPage.DisplayAlert("No Internet", "You are not connected to internet", "Ok");             
@@ -240,14 +242,14 @@ namespace HospitalBooking.ViewModels
                     PatientAge,
                     PatientGender,
                     HospitalId,
-                    HospitalName.Hospitalname.ToString(),
+                    HospitalName.HospitalName.ToString(),
                     HospitalLocation,
                     Status
                     );
 
                 if (response == true)
                 {
-                    await App.Current.MainPage.DisplayAlert("Success", "You book at " + HospitalName.Hospitalname.ToString() + " on " + AppointmentDate.ToString() , "Ok");
+                    await App.Current.MainPage.DisplayAlert("Success", "You book at " + HospitalName.HospitalName.ToString() + " on " + AppointmentDate.ToString() , "Ok");
                     SendNotification();
                     await App.Current.MainPage.Navigation.PushAsync(new MainPage(PatientId,PatientUsername,PatientLocation));
                 }

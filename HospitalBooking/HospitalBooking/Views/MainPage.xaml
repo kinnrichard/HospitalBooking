@@ -36,7 +36,7 @@
                 </StackLayout>
                 <Image
                     HorizontalOptions="EndAndExpand"
-                    Source="bgImage"
+                    Source="pregnancy"
                     WidthRequest="200" />
             </Grid>
             <yummy:PancakeView

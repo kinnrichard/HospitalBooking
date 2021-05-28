@@ -10,7 +10,7 @@ namespace HospitalBooking.Models
         public Guid PatientId { get; set; }
         public Guid HospitalId { get; set; }
         public string NotificationDetails { get; set; }
-        public DateTime NotificationDate { get; set; }
+        public string NotificationDate { get; set; }
         public string NotificationFlag { get; set; }
     }
 }

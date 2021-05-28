@@ -10,7 +10,7 @@ namespace HospitalBooking.Models
         public Guid Id { get; set; }
         public string AppointmentName { get; set; }
         public string AppointmentDescription { get; set; }
-        public DateTime AppointmentDate { get; set; }
+        public string AppointmentDate { get; set; }
         public Guid PatientId { get; set; }
         public string PatientName { get; set; }
         public string PatientLocation { get; set; }

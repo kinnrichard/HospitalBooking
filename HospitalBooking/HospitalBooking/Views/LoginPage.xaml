@@ -26,11 +26,11 @@
                     <Label
                     FontAttributes="Bold"
                     FontSize="30"
-                    Text="Login to Dashboard"
+                    Text="Patient Login                                   "
                     TextColor="White"
                     VerticalOptions="CenterAndExpand" />
                 </StackLayout>
-                <Image Source="bgImage1" WidthRequest="200" />
+                <Image Source="pregnancy" WidthRequest="200" />
             </StackLayout>
             <yummy:PancakeView
             Margin="0,20,0,0"
