@@ -23,7 +23,7 @@
                     TextColor="White"
                     VerticalOptions="CenterAndExpand" />
             </StackLayout>
-            <Image Source="bgImage" 
+            <Image Source="pregnancy" 
                    WidthRequest="200" />
         </StackLayout>
 
@@ -40,19 +40,21 @@
                         <Label
                         Margin="20,0,0,0"
                         FontSize="20"
-                        Text="Appointment name"
+                        Text="Gender"
                         TextColor="#99A1B3" />
                         <yummy:PancakeView
                         Padding="10,0,0,0"
                         BackgroundColor="White"
                         BorderThickness="1"
-                        CornerRadius="0"
+                        CornerRadius="15"
                         Elevation="3"
                         HeightRequest="50">
-                            <renderers:BorderlessEntry
-                            Text="{Binding AppointmentName}"
+                            <renderers:BorderlessPicker
+                            Title="--Select Appointment Type--"
+                            ItemsSource="{Binding AppointmentTypeList}"
+                            ItemDisplayBinding="{Binding AppointmentName}"
+                            SelectedItem="{Binding AppointmentType, Mode=TwoWay}"
                             FontSize="20"
-                            ClearButtonVisibility="WhileEditing"
                             TextColor="#484848" />
                         </yummy:PancakeView>
                     </StackLayout>

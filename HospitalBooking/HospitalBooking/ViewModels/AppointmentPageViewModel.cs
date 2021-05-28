@@ -4,6 +4,7 @@ using HospitalBooking.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,7 @@ namespace HospitalBooking.ViewModels
         public string MaximumDate = DateTime.Now.AddYears(2).ToString("MM/dd/yyyy");
         public string Status = "Pending";
         public string NotificationDetails;
+        public List<AppointmentType> AppointmentTypeList { get; set; }
 
         ObservableCollection<Hospital> _hospitalList;
         public ObservableCollection<Hospital> HospitalList
@@ -32,6 +34,38 @@ namespace HospitalBooking.ViewModels
             }
         }
 
+        public List<AppointmentType> GetAppointmentType()
+        {
+            var appointmenttype = new List<AppointmentType>()
+            {
+                new AppointmentType()
+                {
+                    Id = 1,
+                    AppointmentName = "Prenatal"
+                },
+
+                new AppointmentType()
+                {
+                    Id = 2,
+                    AppointmentName = "Postnatal"
+                },
+
+                new AppointmentType()
+                {
+                    Id = 3,
+                    AppointmentName = "Checkup"
+                },
+
+                new AppointmentType()
+                {
+                    Id = 4,
+                    AppointmentName = "Ultrasound"
+                }
+            };
+
+            return appointmenttype;
+        }
+
         string _appointmentname;
         public string AppointmentName
         {
@@ -39,6 +73,17 @@ namespace HospitalBooking.ViewModels
             set
             {
                 _appointmentname = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private AppointmentType _appointmenttype;
+        public AppointmentType AppointmentType
+        {
+            get { return _appointmenttype; }
+            set
+            {
+                _appointmenttype = value;
                 OnPropertyChanged();
             }
         }
@@ -233,7 +278,7 @@ namespace HospitalBooking.ViewModels
             else
             {
                 var response = await ApiServices.ServiceClientInstance.BookAppointment(
-                    AppointmentName, 
+                    AppointmentType.AppointmentName.ToString(), 
                     AppointmentDescription, 
                     AppointmentDate, 
                     PatientId, 
@@ -267,6 +312,9 @@ namespace HospitalBooking.ViewModels
 
             BookappointmentCommand = new Command
             (async () => await BookAppointment());
+
+            AppointmentTypeList = GetAppointmentType().OrderBy(a => a.AppointmentName).ToList();
+
         }
 
         public AppointmentPageViewModel()
